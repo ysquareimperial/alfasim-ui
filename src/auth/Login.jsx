@@ -16,20 +16,24 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
     setErrors(Validation(values))
-    if (errors.email === '' && errors.password === '') {
-      axios
-        .post('http://localhost:8081/login', values)
-        .then((res) => {
-          if (res.data.Login) {
-            localStorage.setItem('token', res.data.token)
-            navigate('/home')
-          } else {
-            alert('No record found!')
-          }
-          console.log(res)
-        })
-        .catch((err) => console.log(err))
-    }
+    // if (errors.email === '' && errors.password === '') {
+    axios
+      .post('http://localhost:8081/login', values)
+      .then((res) => {
+        if (res.data.Login) {
+          localStorage.setItem('token', res.data.token)
+          navigate('/home')
+        }
+        // if (res.data === 'Success') {
+        //   navigate('/home')
+        // }
+        else {
+          alert('No record found!')
+        }
+        console.log(res)
+      })
+      .catch((err) => console.log(err))
+    // }
   }
   return (
     <div>
@@ -43,9 +47,9 @@ function Login() {
           placeholder="email"
         />
         <br />
-        <span style={{ color: 'red', fontSize: 12 }}>
+        {/* <span style={{ color: 'red', fontSize: 12 }}>
           {errors.email && <span>{errors.email}</span>}
-        </span>
+        </span> */}
         <br />
         <input
           onChange={handleChange}
@@ -55,9 +59,9 @@ function Login() {
           placeholder="password"
         />
         <br />
-        <span style={{ color: 'red', fontSize: 12 }}>
+        {/* <span style={{ color: 'red', fontSize: 12 }}>
           {errors.password && <span>{errors.password}</span>}
-        </span>
+        </span> */}
 
         <br />
         <button type="submit">Login</button>
